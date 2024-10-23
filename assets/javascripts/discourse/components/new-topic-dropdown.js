@@ -1,5 +1,6 @@
 import { getOwner } from "@ember/owner";
 import { service } from "@ember/service";
+import { defaultHomepage } from "discourse/lib/utilities";
 import Composer from "discourse/models/composer";
 import DropdownSelectBoxComponent from "select-kit/components/dropdown-select-box";
 
@@ -8,6 +9,7 @@ export default DropdownSelectBoxComponent.extend({
   siteSettings: service(),
   historyStore: service(),
   dropdownButtons: service(),
+  router: service(),
 
   selectKitOptions: {
     icon: "plus",
@@ -20,6 +22,14 @@ export default DropdownSelectBoxComponent.extend({
 
   get content() {
     return this.dropdownButtons.buttons;
+  },
+
+  get showButton() {
+    if (this.siteSettings.hide_new_topic_button_on_default_page) {
+      const currentRoute = this.router.currentRoute;
+      return currentRoute.name === `discovery.${defaultHomepage()}` ? false : true;
+    }
+    return true;
   },
 
   actions: {
