@@ -27,7 +27,9 @@ export default DropdownSelectBoxComponent.extend({
   get showButton() {
     if (this.siteSettings.hide_new_topic_button_on_default_page) {
       const currentRoute = this.router.currentRoute;
-      return currentRoute.name === `discovery.${defaultHomepage()}` ? false : true;
+      return currentRoute.name === `discovery.${defaultHomepage()}`
+        ? false
+        : true;
     }
     return true;
   },

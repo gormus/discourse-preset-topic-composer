@@ -34,7 +34,9 @@ export default class DropdownButtonsService extends Service {
     this.buttons = buttons;
 
     if (this.siteSettings.hide_unmatched_composer_presets) {
-      const filteredButtons = buttons.filter((b) => b.classNames === "is-selected");
+      const filteredButtons = buttons.filter(
+        (b) => b.classNames === "is-selected"
+      );
       if (filteredButtons.length > 0) {
         this.buttons = filteredButtons;
       }
