@@ -1,7 +1,6 @@
 import { tracked } from "@glimmer/tracking";
 import Component from "@ember/component";
 import { service } from "@ember/service";
-import { defaultHomepage } from "discourse/lib/utilities";
 
 export default Component.extend({
   router: service(),
@@ -9,9 +8,14 @@ export default Component.extend({
 
   didUpdate() {
     this._super(...arguments);
-    if (this.siteSettings.hide_new_topic_button_on_default_page) {
+    if (this.siteSettings.hide_new_topic_button_on_top_menu) {
+      const currentRouteName = this.router.currentRouteName;
       const shouldHideButton =
-        this.router.currentRouteName === `discovery.${defaultHomepage()}`;
+        // Don't use this.siteSettings.top_menu as it is almost always has
+        // limited options selected.
+        "latest|new|unread|hot|categories|unseen|top|posted|bookmarks|read"
+          .split("|")
+          .any((p) => currentRouteName === `discovery.${p}`);
 
       if (shouldHideButton !== this.shouldHide) {
         this.shouldHide = shouldHideButton;

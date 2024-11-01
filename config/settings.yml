@@ -2,7 +2,7 @@ discourse_preset_topic_composer:
   discourse_preset_topic_composer_enabled:
     default: false
     client: true
-  hide_new_topic_button_on_default_page:
+  hide_new_topic_button_on_top_menu:
     default: false
     client: true
   hide_unmatched_composer_presets:
