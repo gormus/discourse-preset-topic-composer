@@ -1,7 +1,5 @@
-{{#if this.currentUser }}
-  {{#if (not this.createTopicDisabled) }}
-    {{#if (not this.shouldHide) }}
-      {{new-topic-dropdown-button category=this.category}}
-    {{/if}}
-  {{/if}}
+{{#if
+  (and this.currentUser (not this.shouldHide) (not this.createTopicDisabled))
+}}
+  {{new-topic-dropdown-button category=this.category}}
 {{/if}}
